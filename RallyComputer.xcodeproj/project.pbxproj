@@ -488,6 +488,7 @@
 				2AE54A0F1C20C70A00D6AD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2AE54A101C20C70A00D6AD68 /* Build configuration list for PBXNativeTarget "RallyComputerTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +497,7 @@
 				2AE54A121C20C70A00D6AD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2AE54A131C20C70A00D6AD68 /* Build configuration list for PBXNativeTarget "RallyComputerUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +506,7 @@
 				2AE54A151C20C70A00D6AD68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
