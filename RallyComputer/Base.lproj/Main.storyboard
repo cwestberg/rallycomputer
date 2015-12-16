@@ -92,6 +92,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="speedLbl" destination="mdW-Lu-6K5" id="dpN-d5-G4r"/>
+                        <outlet property="speedPicker" destination="zUo-fI-MgT" id="g6V-4I-wUo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
