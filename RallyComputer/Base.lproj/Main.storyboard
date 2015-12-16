@@ -50,6 +50,7 @@
                                     <segment title="Distance"/>
                                     <segment title="Clock"/>
                                     <segment title="CTC"/>
+                                    <segment title="C/M"/>
                                 </segments>
                             </segmentedControl>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="m8v-gU-Jx6">
