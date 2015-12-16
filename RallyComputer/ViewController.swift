@@ -12,8 +12,11 @@ class ViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDeleg
     @IBOutlet weak var speedLbl: UILabel!
 
     @IBOutlet weak var speedPicker: UIPickerView!
-    var pickerData: [String] = [String]()
-
+    let pickerData = []
+    let tenths = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
+    let ones = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
+    let decimals = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
+    var speed = "36"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,8 +24,7 @@ class ViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDeleg
         // Connect data:
         speedPicker.delegate = self
         speedPicker.dataSource = self
-        
-        pickerData = ["1", "2", "3", "4", "5", "6"]
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,19 +33,39 @@ class ViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDeleg
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        switch component {
+        case 0:
+            return tenths[row]
+        case 1:
+            return ones[row]
+        case 2:
+            return decimals[row]
+        default:
+            return "?"
+        }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        speedLbl.text = pickerData[row]
+        switch component {
+        case 0:
+            speed = tenths[row]
+        case 1:
+            speed = ones[row]
+        case 2:
+            speed = decimals[row]
+        default:
+            speed = "?"
+        }
+        speedLbl.text = tenths[component]
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
+        return 3
     }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return 10
     }
+    
 
 }
 
