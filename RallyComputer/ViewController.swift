@@ -8,22 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate {
+class ViewController: UIViewController {
     @IBOutlet weak var speedLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
 
-    @IBOutlet weak var speedPicker: UIPickerView!
-    let pickerData = []
-    let tenths = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
-    let ones = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
-    let decimals = ["0","1", "2", "3", "4", "5", "6","7","8","9"]
     var speed = "36"
+    var timer = NSTimer()
+    var timeUnit = "seconds"
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         // Connect data:
-        speedPicker.delegate = self
-        speedPicker.dataSource = self
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
+            selector: "updateTimeLabel", userInfo: nil, repeats: true)
+
        
     }
 
@@ -32,39 +31,104 @@ class ViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            return tenths[row]
-        case 1:
-            return ones[row]
-        case 2:
-            return decimals[row]
+    func updateTimeLabel(){
+        let currentDate = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year, NSCalendarUnit.WeekOfYear, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Nanosecond], fromDate: currentDate)
+        
+//        print("second = \(dateComponents.second)")
+        
+        
+        let unit = Double(dateComponents.second)
+        let second = Int(unit)
+        let secondString = String(format: "%02d", second)
+        
+        let cent = Int((unit * (1.6667)))
+        let centString = String(format: "%02d", cent)
+        let minuteString = String(format: "%02d", dateComponents.minute)
+        switch timeUnit {
+        case "seconds":
+            timeLbl.text = "\(dateComponents.hour):\(minuteString):\(secondString)"
+        case "cents":
+            timeLbl.text = "\(dateComponents.hour):\(minuteString).\(centString)"
         default:
-            return "?"
+            break;
         }
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            speed = tenths[row]
-        case 1:
-            speed = ones[row]
-        case 2:
-            speed = decimals[row]
-        default:
-            speed = "?"
-        }
-        speedLbl.text = tenths[component]
+        
+
     }
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 3
+    @IBAction func startBtn(sender: AnyObject) {
+        let currentDate = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year, NSCalendarUnit.WeekOfYear, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Nanosecond], fromDate: currentDate)
+        
+        //Create the AlertController
+        let actionSheetController: UIAlertController = UIAlertController(title: "Alert", message: "Start At", preferredStyle: .Alert)
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            //Do some stuff
+            
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        //Create and an start action
+        let startAction: UIAlertAction = UIAlertAction(title: "Start", style: .Default) { action -> Void in
+            //Do some other stuff
+
+            
+            let hours = actionSheetController.textFields![0]
+            let minutes = actionSheetController.textFields![1]
+            let units = actionSheetController.textFields![2]
+//            print("hour = \(dateComponents.hour)")
+//            print("minute = \(dateComponents.minute)")
+//            
+//            var hh = ""
+//            if hours.text! == "HH " {
+//                hh = "\(dateComponents.hour)"
+//            }
+//            else {
+//                hh = "\(hours.text!)"
+//            }
+            print("HH: \(hours.text!) MM: \(minutes.text!) UU: \(units.text!)")
+
+        }
+        actionSheetController.addAction(startAction)
+        
+        
+        //Add a text field
+        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+            textField.text = "HH \(dateComponents.hour)"
+            textField.textColor = UIColor.blueColor()
+            textField.keyboardType = UIKeyboardType.NumberPad
+        }
+        
+        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+            textField.text = "MM \(dateComponents.minute + 1)"
+            textField.textColor = UIColor.blueColor()
+            textField.keyboardType = UIKeyboardType.NumberPad
+        }
+        
+        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+            textField.text = "UU 00"
+            textField.textColor = UIColor.blueColor()
+            textField.keyboardType = UIKeyboardType.NumberPad
+        }
+        
+        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+            textField.text = "Speed \(self.speed)"
+            textField.textColor = UIColor.blueColor()
+            textField.keyboardType = UIKeyboardType.NumberPad
+        }
+        //Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
+    
     
 
 }
