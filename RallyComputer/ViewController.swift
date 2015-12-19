@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var speedLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
 
+    @IBOutlet weak var speedLbl: UILabel!
     var speed = "36"
     var timer = NSTimer()
     var timeUnit = "seconds"
@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         // Connect data:
+        speedLbl.text = String(speed)
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self,
             selector: "updateTimeLabel", userInfo: nil, repeats: true)
 
