@@ -10,11 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
 
     @IBOutlet weak var speedLbl: UILabel!
     var speed = "36"
     var timer = NSTimer()
     var timeUnit = "seconds"
+    var distance = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -82,6 +84,7 @@ class ViewController: UIViewController {
             let hours = actionSheetController.textFields![0]
             let minutes = actionSheetController.textFields![1]
             let units = actionSheetController.textFields![2]
+            let dist = actionSheetController.textFields![3]
 //            print("hour = \(dateComponents.hour)")
 //            print("minute = \(dateComponents.minute)")
 //            
@@ -93,7 +96,10 @@ class ViewController: UIViewController {
 //                hh = "\(hours.text!)"
 //            }
             print("HH: \(hours.text!) MM: \(minutes.text!) UU: \(units.text!)")
-
+            let dStr = (dist.text!).stringByReplacingOccurrencesOfString("Distance ", withString:"")
+            self.distanceLbl.text = dStr
+            
+            self.distance = Double(dStr)!
         }
         actionSheetController.addAction(startAction)
         
@@ -123,6 +129,13 @@ class ViewController: UIViewController {
         actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
             //TextField configuration
             textField.text = "Speed \(self.speed)"
+            textField.textColor = UIColor.blueColor()
+            textField.keyboardType = UIKeyboardType.NumberPad
+        }
+        
+        actionSheetController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+            textField.text = "Distance \(self.distance)"
             textField.textColor = UIColor.blueColor()
             textField.keyboardType = UIKeyboardType.NumberPad
         }

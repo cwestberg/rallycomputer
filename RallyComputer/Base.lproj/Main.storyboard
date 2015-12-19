@@ -80,7 +80,7 @@
                                 <state key="normal" title="Change Speed"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DbA-nE-3ey">
-                                <rect key="frame" x="31" y="324" width="240" height="128"/>
+                                <rect key="frame" x="39" y="366" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pauses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MI-xg-U2w">
@@ -133,10 +133,15 @@
                                 <rect key="frame" x="488" y="291" width="62" height="30"/>
                                 <state key="normal" title="More"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZK-NW-9X7">
+                                <rect key="frame" x="421" y="324" width="129" height="30"/>
+                                <state key="normal" title="Reoccurring Pause"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="distanceLbl" destination="u6z-KN-lDG" id="SZY-8D-TpV"/>
                         <outlet property="speedLbl" destination="mdW-Lu-6K5" id="ovl-7M-ed0"/>
                         <outlet property="timeLbl" destination="cVZ-Gv-VhI" id="la7-hx-fy1"/>
                     </connections>
